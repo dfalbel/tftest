@@ -30,10 +30,11 @@ kill_terminal <- function(caption) {
   terms <- get_all_terminal()
   ind <- which(terms$caption == caption)
 
-  if (length(ind) == 1)
+  if (length(ind) == 1) {
     id <- terms$handle[ind]
+    rstudioapi::terminalKill(id)
+  }
 
-  rstudioapi::terminalKill(id)
 }
 
 
