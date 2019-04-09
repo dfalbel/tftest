@@ -1,0 +1,12 @@
+Package: tftest
+Title: Testing TF packages with different TF versions.
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Daniel",
+           family = "Falbel",
+           role = c("aut", "cre"),
+           email = "daniel@rstudio.com")
+Description: Run devtools::test in different terminal tabs.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true

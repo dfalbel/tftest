@@ -1,0 +1,4 @@
+Name: Run TF test
+Description: Run TF test
+Binding: tftest
+Interactive: false
