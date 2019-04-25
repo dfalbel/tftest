@@ -7,7 +7,7 @@
 #'   you want to test against.
 #'
 #' @export
-tftest <- function(envs = c("tf-1.13.1", "tf-1.12.0", "tf-2.0.0")) {
+tftest <- function(envs = c("tf-1.13.1", "tf-1.12.0", "tf-2.0.0", "tf-nightly")) {
   for (env in envs) {
     kill_terminal(env)
     id <- rstudioapi::terminalCreate(caption = env)
@@ -17,6 +17,27 @@ tftest <- function(envs = c("tf-1.13.1", "tf-1.12.0", "tf-2.0.0")) {
     )
     rstudioapi::terminalSend(id, "\n")
   }
+}
+
+tftest2 <- function(env = "tf-nightly") {
+  env_eager <- paste0(env, "-eager")
+  kill_terminal(env)
+  kill_terminal(env_eager)
+
+  id <- rstudioapi::terminalCreate(caption = env)
+  id_eager <- rstudioapi::terminalCreate(caption = env_eager)
+
+  rstudioapi::terminalSend(
+    id = id,
+    glue::glue("Rscript -e 'reticulate::use_virtualenv(\"{env}\");devtools::test()'")
+  )
+  rstudioapi::terminalSend(id, "\n")
+
+  rstudioapi::terminalSend(
+    id = id_eager,
+    glue::glue("Rscript -e 'Sys.setenv(TENSORFLOW_EAGER='TRUE');reticulate::use_virtualenv(\"{env}\");devtools::test()'")
+  )
+  rstudioapi::terminalSend(id_eager, "\n")
 }
 
 get_all_terminal <- function() {
