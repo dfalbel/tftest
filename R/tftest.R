@@ -35,7 +35,7 @@ tftest2 <- function(env = "tf-nightly") {
 
   rstudioapi::terminalSend(
     id = id_eager,
-    glue::glue("Rscript -e 'Sys.setenv(TENSORFLOW_EAGER='TRUE');reticulate::use_virtualenv(\"{env}\");devtools::test()'")
+    glue::glue("Rscript -e 'reticulate::use_virtualenv(\"{env}\");tensorflow::tfe_enable_eager_execution();devtools::test()'")
   )
   rstudioapi::terminalSend(id_eager, "\n")
 }
